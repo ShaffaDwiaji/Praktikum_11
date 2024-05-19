@@ -1,0 +1,86 @@
+<!--Nomor 6-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Form Pendaftaran</title>
+        <script>
+            function setCookie(cname, cvalue, exdays) {
+                var d = new Date();
+                d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+                var expires = "expires=" + d.toUTCString();
+                document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+            }
+
+            function getCookie(cname) {
+                var name = cname + "=";
+                var decodedCookie = decodeURIComponent(document.cookie);
+                var ca = decodedCookie.split(';');
+                for (var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
+
+            function saveFormData() {
+                var nim = document.getElementById("nim").value;
+                var nama = document.getElementById("nama").value;
+                var email = document.getElementById("email").value;
+                var tempat = document.getElementById("tempat").value;
+                var tanggal = document.getElementById("tanggal").value;
+                var alamat = document.getElementById("alamat").value;
+                var jenis_kelamin = document.querySelector('input[name="jenis_kelamin"]:checked').value;
+                
+                setCookie("nim", nim, 30);
+                setCookie("nama", nama, 30);
+                setCookie("email", email, 30);
+                setCookie("tempat", tempat, 30);
+                setCookie("tanggal", tanggal, 30);
+                setCookie("alamat", alamat, 30);
+                setCookie("jenis_kelamin", jenis_kelamin, 30);
+            }
+        </script>
+    </head>
+    <body>
+        <form action="proses_pendaftaran.php" method="get" onsubmit="saveFormData()">
+            <fieldset>
+                <div class="form-group">
+                    <label for="nim">Nim:</label>
+                    <input type="text" name="nim" id="nim">
+                </div>
+                <div class="form-group">
+                    <label for="nama">Nama Lengkap:</label>
+                    <input type="text" name="nama" id="nama">
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail:</label>
+                    <input type="email" name="email" id="email">
+                </div>
+                <div class="form-group">
+                    <label for="ttl">Tempat, Tanggal Lahir:</label>
+                    <input type="text" name="tempat" id="tempat">
+                    <input type="date" name="tanggal" id="tanggal">
+                </div>
+                <div class="form-group">
+                    <label for="alamat">Alamat:</label>
+                    <textarea name="alamat" id="alamat" cols="20" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="gender">Gender:</label>
+                    <input type="radio" name="jenis_kelamin" id="jenis_kelamin" value="Laki-Laki"> <label for="jenis_kelamin">Laki-Laki</label>
+                    <input type="radio" name="jenis_kelamin" id="jenis_kelamin" value="Perempuan"> <label for="jenis_kelamin">Perempuan</label>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Kirim</button>
+                </div>
+            </fieldset>
+        </form>
+    </body>
+</html>
